@@ -1,7 +1,7 @@
 {
-  "name": "backend-feathersjs",
+  "name": "kripticc-backend",
   "description": "",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "homepage": "",
   "private": true,
   "main": "src",
@@ -9,8 +9,8 @@
     "feathers"
   ],
   "author": {
-    "name": "uditt lamba",
-    "email": "uditt.lamba@pm.me"
+    "name": "Uditt Lamba",
+    "email": "uditt@pm.me"
   },
   "contributors": [],
   "bugs": {},
@@ -39,42 +39,33 @@
   },
   "types": "lib/",
   "dependencies": {
-    "@feathersjs/authentication": "^4.5.12",
-    "@feathersjs/authentication-local": "^4.5.12",
-    "@feathersjs/authentication-oauth": "^4.5.12",
+    "@feathersjs/authentication": "^4.5.14",
+    "@feathersjs/authentication-local": "^4.5.14",
+    "@feathersjs/authentication-oauth": "^4.5.14",
     "@feathersjs/configuration": "^4.5.12",
     "@feathersjs/errors": "^4.5.12",
-    "@feathersjs/express": "^4.5.12",
+    "@feathersjs/express": "^4.5.14",
     "@feathersjs/feathers": "^4.5.12",
-    "@feathersjs/socketio": "^4.5.13",
-    "@feathersjs/transport-commons": "^4.5.12",
-    "cassanknex": "^1.21.0",
+    "@feathersjs/socketio": "^4.5.14",
+    "@feathersjs/transport-commons": "^4.5.14",
     "compression": "^1.7.4",
     "cors": "^2.8.5",
-    "express-cassandra": "^2.8.0",
-    "feathers-cassandra": "^3.5.8",
+    "feathers-sequelize": "^6.3.3",
     "helmet": "^4.6.0",
+    "pg": "^8.7.3",
+    "sequelize": "^6.19.0",
+    "sequelize-cli": "^6.4.1",
     "serve-favicon": "^2.5.0",
+    "shx": "^0.3.4",
+    "typescript": "^4.6.4",
     "winston": "^3.7.2"
   },
   "devDependencies": {
+    "@types/bluebird": "^3.5.36",
     "@types/compression": "^1.7.2",
     "@types/cors": "^2.8.12",
-    "@types/jest": "^27.4.1",
     "@types/jsonwebtoken": "^8.5.8",
     "@types/serve-favicon": "^2.5.3",
-    "@typescript-eslint/eslint-plugin": "^5.20.0",
-    "@typescript-eslint/parser": "^5.20.0",
-    "axios": "^0.26.1",
-    "eslint": "^8.14.0",
-    "eslint-config-standard": "^17.0.0",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-n": "^15.1.0",
-    "eslint-plugin-promise": "^6.0.0",
-    "jest": "^27.5.1",
-    "shx": "^0.3.4",
-    "ts-jest": "^27.1.4",
-    "ts-node-dev": "^1.1.8",
-    "typescript": "^4.6.3"
+    "nodemon": "^2.0.16"
   }
 }
