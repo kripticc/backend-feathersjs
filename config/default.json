@@ -26,5 +26,6 @@
   "pg_username": "username",
   "pg_password": "password",
   "pg_database": "kripticc-dev",
-  "pg_port": "5432"
+  "pg_port": "5432",
+  "saltOrRound": 10
 }
