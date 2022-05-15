@@ -1,6 +1,6 @@
 import * as feathersAuthentication from '@feathersjs/authentication'
 import * as local from '@feathersjs/authentication-local'
-import { assignBase32Secret } from '../../hooks/assign-base32-secret'
+import { assignSecret } from '../../hooks/assign-secret'
 import { hashEmails } from '../../hooks/hash-email'
 import { generateAuthenticatorUri } from '../../hooks/generate-authenticator-uri'
 import { generateQrCode } from '../../hooks/generate-qr-code'
@@ -15,9 +15,9 @@ const {
 export default {
   before: {
     all: [],
-    find: [/* authenticate('jwt') */],
+    find: [authenticate('jwt')],
     get: [authenticate('jwt')],
-    create: [hashEmails(), assignBase32Secret()],
+    create: [hashEmails(), assignSecret()],
     update: [authenticate('jwt')],
     patch: [authenticate('jwt')],
     remove: []
@@ -29,14 +29,14 @@ export default {
       // Always must be the last hook
       // protect('email', 'secret')
     ],
-    find: [protect('email', 'secret')],
-    get: [protect('email', 'secret')],
+    find: [protect('email', 'secret', 'updatedAt')],
+    get: [protect('email', 'secret', 'updatedAt')],
     create: [
       generateAuthenticatorUri(),
       generateQrCode(),
-      protect('email', 'secret')],
-    update: [protect('email', 'secret')],
-    patch: [protect('email', 'secret')],
+      protect('email', 'secret', 'updatedAt')],
+    update: [protect('email', 'secret', 'updatedAt')],
+    patch: [protect('email', 'secret', 'updatedAt')],
     remove: []
   },
 

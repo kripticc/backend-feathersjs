@@ -4,13 +4,25 @@ import { AuthenticationService } from '@feathersjs/authentication'
 import bcrypt from 'bcrypt'
 import { NotAuthenticated, NotFound } from '@feathersjs/errors'
 import speakeasy from '@levminer/speakeasy'
+import z from 'zod'
 
-interface authData {
-  strategy: string
-  email: string
-  userName: string
-  totp: string
-}
+const authData = z.object({
+  strategy: z.string().default('jwt'),
+  email: z.string().email({ message: 'Invalid email address' }),
+  userName: z
+    .string()
+    .max(20, 'username cannot be longer than 20 characters')
+    .and(z.string().regex(/^[a-zA-Z\d]+$/)),
+  totp: z
+    .string()
+    .regex(/^\d+$/, 'Invalid TOTP')
+    .and(
+      z.string().length(6, 'Invalid TOTP length, expected exactly 6 digits')
+    )
+})
+
+
+type AuthData = z.infer<typeof authData>
 
 // interface ServiceOptions {}
 
@@ -24,7 +36,8 @@ export class UserAuth extends AuthenticationService {
     this.app = app
   }
 
-  async create(data: authData, params?: Params): Promise<authData> {
+  async create(data: AuthData, params?: Params): Promise<AuthData> {
+    authData.parse(data)
 
     const user = await this.app.service('users')._find({
       query: {
@@ -37,20 +50,17 @@ export class UserAuth extends AuthenticationService {
     }
 
     const isHashMatch = bcrypt.compareSync(data.email, user.data[0].email)
-    console.log(isHashMatch)
 
     if (!isHashMatch) {
       throw new NotFound('Wrong email, please try again')
     }
 
-    console.log(user.data[0].secret)
     const isAuthenticated = speakeasy.totp.verify({
       secret: user.data[0].secret,
       token: data.totp,
-      encoding: 'base32'
+      window: 1
     })
 
-    console.log(isAuthenticated)
     if (!isAuthenticated) {
       throw new NotAuthenticated('Wrong otp, please try again!')
     }
@@ -60,10 +70,13 @@ export class UserAuth extends AuthenticationService {
       displayName: user.data[0].displayName
     })
     // @ts-ignore
-    return await super.create({
-      strategy: 'jwt',
-      accessToken
-    }, params as Params)
+    return await super.create(
+      {
+        strategy: 'jwt',
+        accessToken
+      },
+      params as Params
+    )
   }
 
   async getPayload(authResult: any, params: Params) {
