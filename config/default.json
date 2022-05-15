@@ -7,47 +7,25 @@
     "max": 50
   },
   "authentication": {
-    "entity": "user",
-    "service": "users",
-    "secret": "EVZU1GlE6wJUZzakqhEDpmXnioo=",
+    "entity": null,
+    "secret": "AUDmOeuDdY+ttj0ad4NFEhMpJ2I=",
     "authStrategies": [
-      "jwt",
-      "local"
+      "jwt"
     ],
     "jwtOptions": {
       "header": {
         "typ": "access"
       },
-      "audience": "https://yourdomain.com",
+      "audience": "https://kripti.cc",
       "issuer": "feathers",
       "algorithm": "HS256",
       "expiresIn": "1d"
-    },
-    "local": {
-      "usernameField": "email",
-      "passwordField": "password"
     }
   },
-  "cassandra": {
-    "clientOptions": {
-      "contactPoints": [
-        "localhost"
-      ],
-      "protocolOptions": {
-        "port": 9042
-      },
-      "keyspace": "backend_feathersjs",
-      "queryOptions": {
-        "consistency": 1
-      }
-    },
-    "ormOptions": {
-      "defaultReplicationStrategy": {
-        "class": "SimpleStrategy",
-        "replication_factor": 1
-      },
-      "migration": "alter",
-      "createKeyspace": true
-    }
-  }
+  "pg_host": "localhost",
+  "pg_username": "username",
+  "pg_password": "password",
+  "pg_database": "kripticc-dev",
+  "pg_port": "5432",
+  "saltOrRound": 10
 }

@@ -1,12 +1,9 @@
-import { Service } from 'feathers-cassandra'
+import { Service, SequelizeServiceOptions } from 'feathers-sequelize'
+import { Application } from '../../declarations'
 
 export class Users extends Service {
-  constructor (options) {
-    const { Model, ...otherOptions } = options
-
-    super({
-      ...otherOptions,
-      model: Model
-    })
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  constructor (options: Partial<SequelizeServiceOptions>, app: Application) {
+    super(options)
   }
 }
