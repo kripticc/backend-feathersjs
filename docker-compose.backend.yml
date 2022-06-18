@@ -7,9 +7,9 @@ services:
     ports:
       - "3030:3030"
     restart: always
-    depends_on:
-     - postgres
-     - redis
+#    depends_on:
+#     - postgres-dev
+#     - redis-dev
     volumes:
       - ./:/kripticc-feathers-dev
     command: npm start
