@@ -1,4 +1,4 @@
-// Initializes the `user-auth` service on path `/user-auth`
+// Initializes the `userSchema-auth` service on path `/userSchema-auth`
 import { ServiceAddons } from '@feathersjs/feathers'
 import { Application } from '../../declarations'
 import { UserAuth } from './user-auth.class'

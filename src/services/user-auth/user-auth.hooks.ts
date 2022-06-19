@@ -1,13 +1,15 @@
-import { HooksObject } from '@feathersjs/feathers'
+import validateData from "../../hooks/validate-data";
+import { userAuthSchema } from "./user-auth.schema";
+import { disallow } from "feathers-hooks-common";
 
 export default {
   before: {
     all: [],
-    find: [],
-    get: [],
-    create: [],
-    update: [],
-    patch: [],
+    find: [disallow()],
+    get: [disallow()],
+    create: [validateData(userAuthSchema)],
+    update: [disallow()],
+    patch: [disallow()],
     remove: []
   },
 
@@ -30,4 +32,4 @@ export default {
     patch: [],
     remove: []
   }
-}
+};

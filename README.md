@@ -1,10 +1,11 @@
 # kripticc-backend
 
-> 
+>
 
 ## About
 
-This project uses [Feathers](http://feathersjs.com). An open source web framework for building modern real-time applications.
+This project uses [Feathers](http://feathersjs.com). An open source web framework for building modern real-time
+applications.
 
 ## Getting Started
 
@@ -17,11 +18,13 @@ Getting up and running is as easy as 1, 2, 3.
     cd path/to/kripticc-backend
     npm install
     ```
-
-3. Start your app
+3. Start your postgres and redis servers
+    ```
+   sudo docker-compose -f docker-compose.db.yml up -d
+4. Start your app
 
     ```
-    npm start
+    npm run dev
     ```
 
 ## Testing
