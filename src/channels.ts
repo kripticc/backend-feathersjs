@@ -1,30 +1,31 @@
-import "@feathersjs/transport-commons";
-import { HookContext } from "@feathersjs/feathers";
-import { Application } from "./declarations";
+import '@feathersjs/transport-commons'
+import { HookContext } from '@feathersjs/feathers'
+import { Application } from './declarations'
+import is from 'is'
 
-export default function(app: Application): void {
-  if (typeof app.channel!=="function") {
+export default function (app: Application): void {
+  if (typeof app.channel !== 'function') {
     // If no real-time functionality has been configured just return
-    return;
+    return
   }
 
-  app.on("connection", (connection: any): void => {
+  app.on('connection', (connection: any): void => {
     // On a new real-time connection, add it to the anonymous channel
-    app.channel("anonymous").join(connection);
-  });
+    app.channel('anonymous').join(connection)
+  })
 
-  app.on("login", (authResult: any, { connection }: any): void => {
+  app.on('login', (authResult: any, { connection }: any): void => {
     // connection can be undefined if there is no
     // real-time connection, e.g. when logging in via REST
-    if (connection) {
+    if (is.object(connection)) {
       // Obtain the logged in userSchema from the connection
       // const userSchema = connection.userSchema;
 
       // The connection is no longer anonymous, remove it
-      app.channel("anonymous").leave(connection);
+      app.channel('anonymous').leave(connection)
 
       // Add it to the authenticated userSchema channel
-      app.channel("authenticated").join(connection);
+      app.channel('authenticated').join(connection)
 
       // Channels can be named anything and joined on any condition
 
@@ -38,7 +39,7 @@ export default function(app: Application): void {
       // app.channel(`emails/${userSchema.email}`).join(connection);
       // app.channel(`userIds/${userSchema.id}`).join(connection);
     }
-  });
+  })
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   app.publish((data: any, hook: HookContext) => {
@@ -48,8 +49,8 @@ export default function(app: Application): void {
     console.log("Publishing all events to all authenticated users. See `channels.ts` and https://docs.feathersjs.com/api/channels.html for more information."); // eslint-disable-line
 
     // e.g. to publish all service events to all authenticated users use
-    return app.channel("authenticated");
-  });
+    return app.channel('authenticated')
+  })
 
   // Here you can also add service specific event publishers
   // e.g. the publish the `users` service `created` event to the `admins` channel

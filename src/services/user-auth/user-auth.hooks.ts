@@ -1,6 +1,6 @@
-import validateData from "../../hooks/validate-data";
-import { userAuthSchema } from "./user-auth.schema";
-import { disallow } from "feathers-hooks-common";
+import validateData from '../../hooks/validate-data'
+import { userAuthSchema } from './user-auth.schema'
+import { disallow } from 'feathers-hooks-common'
 
 export default {
   before: {
@@ -32,4 +32,4 @@ export default {
     patch: [],
     remove: []
   }
-};
+}
